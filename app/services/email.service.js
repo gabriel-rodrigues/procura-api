@@ -13,8 +13,8 @@ EmailService.prototype.enviar = function (mailOptions) {
     var transporter = nodemailer.createTransport({
         service: 'Hotmail',
         auth: {
-            user: 'gabrielll.bsb@hotmail.com',
-            pass: '81819083'
+            user: '', // entre as aspas simples, coloque seu email com dominio hotmail.
+            pass: '' //entre as aspas simples, coloque a sua senha.
         },
         priority: 'high'
     });

@@ -1,0 +1,49 @@
+<div class="row" ng-init="cursoCtrl.onInit()">
+    <div class="col-lg-12">
+        <fieldset>
+            <legend>Cursos</legend>
+
+
+            <div class="row" style="margin-top: 30px">
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Digite para aqui filtrar os cursos..." data-ng-model="cursoCtrl.pesquisa">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Pesquisar</button>
+                      </span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <a ui-sref="admin.cursos.novo" class="btn btn-success pull-right">Novo</a>
+                </div>
+            </div>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Sigla</th>
+                        <th>Total de Matérias</th>
+                        <th>Opção</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="curso in cursoCtrl.cursos | filter: { nome: cursoCtrl.pesquisa}">
+                        <td class="text-left">{{curso.nome | uppercase}}</td>
+                        <td class="text-left">{{curso.sigla | uppercase}}</td>
+                        <td class="text-left">
+                            <a href="javascript:void(0)" ui-sref="admin.cursos.editar({ id: curso._id })">{{curso.materias.length}}  </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-warning" ui-sref="admin.cursos.editar({ id: curso._id })">Editar</a>
+                            <a class="btn btn-danger"
+                               href="javascript:void(0)"
+                               ng-if="curso.isPermitidoExcluir"
+                               ng-click="cursoCtrl.excluir(curso)">Excluir</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+</div>

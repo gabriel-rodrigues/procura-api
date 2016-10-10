@@ -1,0 +1,107 @@
+<div class="row" data-ng-init="estagioCtrl.onInitNovoEditar()">
+    <div class="col-lg-12">
+
+        <fieldset ng-show="estagioCtrl.podeCadastrar()">
+            <legend>{{estagioCtrl.descricaoLegenda}}</legend>
+
+            <div class="row">
+                <div class="col-sm-8">
+                    <form class="form-horizontal" role="form" name="formNovoEstagio" novalidate>
+                        <div class="form-group" ng-class="{ 'has-error' : formNovoEstagio.titulo.$invalid && !formNovoEstagio.titulo.$pristine }">
+                            <label class="control-label col-sm-2">Título:*</label>
+                            <div class="col-sm-6">
+                                <input type="text"
+                                       class="form-control"
+                                       name="titulo"
+                                       ng-model="estagioCtrl.formulario.titulo"
+                                       placeholder="Entre com o título do estágio"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : formNovoEstagio.quantidade.$invalid && !formNovoEstagio.quantidade.$pristine }">
+                            <label class="control-label col-sm-2" >Quantidade de Vagas:*</label>
+                            <div class="col-sm-4">
+                                <input type="text"
+                                       class="form-control"
+                                       name="quantidade"
+                                       ng-model="estagioCtrl.formulario.quantidade"
+                                       somente-numero
+                                       placeholder="Enter com a quantidade de vagas"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : formNovoEstagio.dataInicio.$invalid && !formNovoEstagio.dataInicio.$pristine }">
+                            <label class="control-label col-sm-2" >Data de Início:</label>
+                            <div class="col-sm-4">
+                                <input type="text"
+                                       class="form-control"
+                                       ng-model="estagioCtrl.formulario.dataInicio"
+                                       date-validator
+                                       date-format="dd/mm/yyyy"
+                                       mask='39/19/9999'
+                                       name="dataInicio"
+                                       placeholder="dd/mm/aaaa"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : formNovoEstagio.dataTermino.$invalid && !formNovoEstagio.dataTermino.$pristine }">
+                            <label class="control-label col-sm-2" >Data de Término:</label>
+                            <div class="col-sm-4">
+                                <input type="text"
+                                       class="form-control"
+                                       ng-model="estagioCtrl.formulario.dataTermino"
+                                       date-validator
+                                       date-format="dd/mm/yyyy"
+                                       mask='39/19/9999'
+                                       name="dataTermino"
+                                       placeholder="dd/mm/aaaa"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-repeat="item in estagioCtrl.formulario.cursos track by $index">
+                            <label class="control-label col-sm-2" >Curso:*</label>
+                            <div class="col-sm-4">
+                                <select class="form-control"
+                                        ng-model="estagioCtrl.formulario.cursos[$index]"
+                                        required
+                                        ng-options="curso._id as curso.nome for curso in estagioCtrl.cursos">
+                                    <option value>--SELECIONE--</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <button type="button"
+                                        ng-click="estagioCtrl.adicionarCurso()"
+                                        ng-show="$index === 0"
+                                        class="btn btn-success">+
+                                </button>
+                                <button type="button"
+                                        class="btn btn-danger"
+                                        ng-click="estagioCtrl.removerCurso($index)"
+                                        ng-show="$index > 0">-</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Descrição: *</label>
+                            <div class="col-sm-10">
+                                <text-angular ng-model="estagioCtrl.formulario.descricao" required></text-angular>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10 pull-right">
+                                <button type="submit"
+                                        ng-disabled="formNovoEstagio.$invalid"
+                                        ng-click="estagioCtrl.salvar()"
+                                        class="btn btn-primary">Cadastrar</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </fieldset>
+
+        <div ng-hide="estagioCtrl.podeCadastrar()" class="alert alert-info">
+            <strong>Info!</strong> Para cadastrar um Estágio é necessário que tenha ao menos um Curso cadastrado. <a ui-sref="admin.cursos.novo">Clique Aqui</a>
+        </div>
+    </div>
+</div>

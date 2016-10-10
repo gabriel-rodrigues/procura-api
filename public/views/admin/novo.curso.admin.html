@@ -1,0 +1,92 @@
+<div class="row" ng-init="cursoCtrl.onInitEditarNovo()">
+    <div class="col-lg-12">
+
+
+        <pre>{{cursoCtrl.formulario | json}}</pre>
+
+        <fieldset>
+            <legend>{{cursoCtrl.descricaoLegenda}}</legend>
+
+
+            <div class="row">
+                <div class="col-sm-8">
+                    <form class="form-horizontal" role="form" name="formNovoCurso">
+
+                        <div class="form-group" ng-class="{ 'has-error' : formNovoCurso.nome.$invalid && !formNovoCurso.nome.$pristine }">
+                            <label class="control-label col-sm-2">Nome:*</label>
+                            <div class="col-sm-6">
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="Entre com o nome do curso"
+                                       ng-model="cursoCtrl.formulario.nome"
+                                       name="nome"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : formNovoCurso.sigla.$invalid && !formNovoCurso.sigla.$pristine }">
+                            <label class="control-label col-sm-2" >Sigla:*</label>
+                            <div class="col-sm-4">
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="Enter com a sigla do curso"
+                                       ng-model="cursoCtrl.formulario.sigla"
+                                       name="sigla"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button"
+                                        ng-click="cursoCtrl.adicionarMateria()"
+                                        class="btn btn-default pull-right">Adicionar Matéria</button>
+                            </div>
+                        </div>
+                        <hr >
+                        <div ng-repeat="materia in cursoCtrl.formulario.materias">
+                             <div class="form-group" ng-class="{ 'has-error' : formNovoCurso['nome' + {{$index}}].$invalid && !formNovoCurso['nome' + {{$index}}].$pristine }">
+                                <label class="control-label col-sm-2" >Nome:*</label>
+                                <div class="col-sm-6">
+                                    <input type="text"
+                                           class="form-control"
+                                           placeholder="Entre com o nome da matéria"
+                                           ng-model="materia.nome"
+                                           name="nome{{$index}}"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error' : formNovoCurso['cargaHoraria' + {{$index}}].$invalid && !formNovoCurso['cargaHoraria' + {{$index}}].$pristine }">
+                                <label class="control-label col-sm-2">Carga Horária:*</label>
+                                <div class="col-sm-4">
+                                    <input type="text"
+                                           class="form-control"
+                                           placeholder="Entre com a carga horária"
+                                           ng-model="materia.cargaHoraria"
+                                           name="cargaHoraria{{$index}}"
+                                           somente-numero
+                                           required>
+                                </div>
+                            </div>
+                            <a href="javascript:void(0)"
+                               class="btn btn-danger"
+                               ng-if="materia.isPermitidoExcluir"
+                               ng-click="cursoCtrl.removerMaterias($index)">Remover Matéria</a>
+                            <hr >
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10 pull-right">
+                                <button type="submit"
+                                        ng-disabled="formNovoCurso.$invalid"
+                                        ng-click="cursoCtrl.salvar()"
+                                        class="btn btn-primary">Cadastrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </fieldset>
+
+
+    </div>
+</div>

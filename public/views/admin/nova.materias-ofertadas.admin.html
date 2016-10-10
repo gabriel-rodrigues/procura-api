@@ -1,0 +1,77 @@
+<div class="row" ng-init="materiaOfertadaCtrl.onInitNova()">
+    <div class="col-lg-12">
+        <fieldset>
+            <legend>Matérias Ofertadas</legend>
+
+
+            <div class="row">
+                <div class="col-sm-8">
+                    <form class="form-horizontal" role="form" name="formNovoCurso">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Escolha o Curso:</label>
+                            <div class="col-sm-6">
+                                <select class="form-control"
+                                        ng-model="materiaOfertadaCtrl.formulario.curso"
+                                        ng-options="curso.nome for curso in materiaOfertadaCtrl.cursos">
+                                    <option>--SELECIONE--</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    <fieldset ng-show="materiaOfertadaCtrl.formulario.curso !== null" style="margin-top: 30px">
+                        <legend>Selecione a Matéria</legend>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Carga Horária</th>
+                                <th>Ação</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="materia in materiaOfertadaCtrl.formulario.curso.materias | MateriaOfertadaAtivaFilter: materiaOfertadaCtrl.materiasOfertadas track by $index" ng-class="{ 'warning': materia === materiaOfertadaCtrl.formulario.materiaSelecionada}">
+                                <td>{{materia.nome}}</td>
+                                <td>{{materia.cargaHoraria + ' Hora(s)'}}</td>
+                                <td>
+                                    <button ng-click="materiaOfertadaCtrl.selecionar(materia)"
+                                            class="btn btn-info">Selecionar Matéria</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </fieldset>
+
+                    <fieldset style="margin-top: 30px" ng-show="materiaOfertadaCtrl.formulario.curso !== null && materiaOfertadaCtrl.formulario.materiaSelecionada != null">
+                        <legend>Selecione as Unidades</legend>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Unidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="unidade in materiaOfertadaCtrl.unidades">
+                                    <td style="width: 5px !important;">
+                                        <input type="checkbox" data-ng-value="unidade" data-ng-model="materiaOfertadaCtrl.formulario.materiaSelecionada.unidades[$index]" />
+                                    </td>
+                                    <td>{{unidade}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </fieldset>
+                        <div class="form-group">
+                            <div class="col-sm-1 pull-right">
+                                <button type="submit"
+                                        ng-show="materiaOfertadaCtrl.podeSalvar()"
+                                        ng-click="materiaOfertadaCtrl.salvar()"
+                                        class="btn btn-success">Salvar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>

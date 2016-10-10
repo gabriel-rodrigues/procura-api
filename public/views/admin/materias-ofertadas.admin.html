@@ -1,0 +1,56 @@
+<div ng-init="materiaOfertadaCtrl.onInit()">
+    <div class="row">
+        <div class="col-sm-12">
+            <fieldset>
+                <legend>Matérias Ofertadas Ativada(s)</legend>
+
+                <div class="row" style="margin-top: 30px">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Digite para aqui filtrar as matérias ofertadas..." ng-model="materiaOfertadaCtrl.pesquisa">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Pesquisar</button>
+                      </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <a ui-sref="admin.materiasOfertadas.nova" class="btn btn-success pull-right">Ofertar</a>
+                    </div>
+                </div>
+
+                <table class="table table-hover" style="margin-top: 30px">
+                    <thead>
+                    <tr>
+                        <th>Matéria</th>
+                        <th>Carga Horária</th>
+                        <th>Curso</th>
+                        <th>Unidades</th>
+                        <th>Ativada</th>
+                        <th>Opção</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="oferta in materiaOfertadaCtrl.materiasOfertadas | MateriaOfertadaFilter: materiaOfertadaCtrl.pesquisa">
+                        <td>{{oferta.materia.nome | uppercase}}</td>
+                        <td>{{oferta.materia.cargaHoraria | uppercase}}</td>
+                        <td>{{oferta.curso | uppercase}}</td>
+                        <td>
+                            <div ng-repeat="unidade in oferta.materia.unidades" style="margin-bottom: 3px" class="text-center">
+                                <span class="label label-success">{{unidade}}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="label label-info">{{(oferta.IsAtivada ? 'Ativada' : 'Desativada') | uppercase}}</span>
+                        </td>
+                        <td>
+                            <a class="btn btn-warning"
+                               ng-click="materiaOfertadaCtrl.desativar(oferta)"
+                               href="javascript:void(0)">Desativar</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+    </div>
+</div>

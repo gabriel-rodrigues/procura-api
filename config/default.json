@@ -1,0 +1,12 @@
+{
+  "mongo": {
+    "usuario": "",
+    "senha": "",
+    "servidor": "localhost",
+    "porta": 27017,
+    "baseDados": "procura-alerta"
+  },
+  "seguranca": {
+    "chaveSecreta": "#procula.alerta#"
+  }
+}

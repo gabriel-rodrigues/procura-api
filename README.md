@@ -1,2 +1,2 @@
 # procura-api
-API escrita com JavaScript e executada no NodeJS. Ela irá servir ao aplicativo que será desenvolvido para android/ios.
+API escrita com JavaScript e executada no NodeJS. Ela servirá o aplicativo que está sendo desenvolvido para android/ios.
